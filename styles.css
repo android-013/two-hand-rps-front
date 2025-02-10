@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #3B3B98;
+}
+
+.game-container {
+    text-align: center;
+    background-color: #55E6C1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    width: 60%;
+}
+
+h1 {
+    color: #222;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.player {
+    text-align: center;
+}
+
+.hands {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.auto-hand {
+    font-size: 2.5rem;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    width: 60px;
+    text-align: center;
+}
+
+.choice-btn {
+    font-size: 2rem;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.choice-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.withdraw-btn {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.withdraw-btn:hover {
+    background-color: #d63031;
+}
+
+#playBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#playBtn:hover {
+    background-color: #218838;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}

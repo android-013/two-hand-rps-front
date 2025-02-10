@@ -3,48 +3,60 @@ body {
     text-align: center;
     background-color: #f4f4f4;
     margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
-}
-
-.game-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: white;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
-    color: #333;
-}
-
-.hand-selection {
-    margin: 10px 0;
-}
-
-select {
-    padding: 5px;
-    font-size: 16px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
+  }
+  
+  .auto-section, .player-section {
+    margin-bottom: 20px;
+  }
+  
+  .auto-hands, .player-hands {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .hand {
+    font-size: 2rem;
+    padding: 10px;
+    border: 2px solid #333;
     border-radius: 5px;
-}
-
-button:hover {
-    background: #218838;
-}
-
-.result-section {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hand-options {
+    margin: 10px;
+  }
+  
+  .choice {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .action-buttons {
     margin-top: 20px;
-    font-size: 18px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #result {
+    margin-top: 20px;
+    font-size: 1.5rem;
     font-weight: bold;
-}
+  }

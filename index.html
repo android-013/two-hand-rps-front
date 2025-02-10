@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Hand RPS</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Hand Rock-Paper-Scissors</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Two-Hand Rock Paper Scissors</h1>
-        <div class="player-section">
-            <h2>Player</h2>
-            <div class="hand-selection">
-                <label>Left Hand:</label>
-                <select id="player-left">
-                    <option value="rock">Rock</option>
-                    <option value="paper">Paper</option>
-                    <option value="scissors">Scissors</option>
-                </select>
-            </div>
-            <div class="hand-selection">
-                <label>Right Hand:</label>
-                <select id="player-right">
-                    <option value="rock">Rock</option>
-                    <option value="paper">Paper</option>
-                    <option value="scissors">Scissors</option>
-                </select>
-            </div>
-        </div>
-        <div class="auto-section">
-            <h2>Auto</h2>
-            <p>Left Hand: <span id="auto-left">?</span></p>
-            <p>Right Hand: <span id="auto-right">?</span></p>
-        </div>
-        <button id="play-button">Play</button>
-        <div class="result-section">
-            <h2>Result</h2>
-            <p id="result-text">Make your move!</p>
-        </div>
+  <div class="container">
+    <h1>Two-Hand Rock-Paper-Scissors</h1>
+
+    <!-- Auto (Computer) Section -->
+    <div class="auto-section">
+      <h2>Auto</h2>
+      <div class="auto-hands">
+        <div class="hand" id="auto-left-hand">?</div>
+        <div class="hand" id="auto-right-hand">?</div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Player Section -->
+    <div class="player-section">
+      <h2>Player</h2>
+      <div class="player-hands">
+        <div class="hand-options">
+          <h3>Left Hand</h3>
+          <button class="choice" data-hand="left" data-choice="rock">Rock</button>
+          <button class="choice" data-hand="left" data-choice="paper">Paper</button>
+          <button class="choice" data-hand="left" data-choice="scissors">Scissors</button>
+        </div>
+        <div class="hand-options">
+          <h3>Right Hand</h3>
+          <button class="choice" data-hand="right" data-choice="rock">Rock</button>
+          <button class="choice" data-hand="right" data-choice="paper">Paper</button>
+          <button class="choice" data-hand="right" data-choice="scissors">Scissors</button>
+        </div>
+      </div>
+    </div>
 
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button id="play-button">Play</button>
+      <button id="withdraw-left-button" class="hidden">Withdraw Left</button>
+      <button id="withdraw-right-button" class="hidden">Withdraw Right</button>
+    </div>
+
+    <!-- Result Display -->
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

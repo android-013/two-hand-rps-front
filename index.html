@@ -3,48 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two-Hand Rock Paper Scissors (Auto vs Player)</title>
+    <title>Two-Hand RPS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="game-container">
         <h1>Two-Hand Rock Paper Scissors</h1>
-
-        <div class="players">
-            <!-- Auto Section -->
-            <div class="player">
-                <h2>Auto (AI)</h2>
-                <div class="hands">
-                    <div class="auto-hand" id="auto-left">❔</div>
-                    <div class="auto-hand" id="auto-right">❔</div>
-                </div>
-                <p id="auto-withdrawn" class="withdrawn-text"></p>
+        <div class="player-section">
+            <h2>Player</h2>
+            <div class="hand-selection">
+                <label>Left Hand:</label>
+                <select id="player-left">
+                    <option value="rock">Rock</option>
+                    <option value="paper">Paper</option>
+                    <option value="scissors">Scissors</option>
+                </select>
             </div>
-
-            <!-- Player Section -->
-            <div class="player">
-                <h2>Player</h2>
-                <div class="hands">
-                    <button class="choice-btn" data-hand="left">🪨</button>
-                    <button class="choice-btn" data-hand="left">📄</button>
-                    <button class="choice-btn" data-hand="left">✂️</button>
-                </div>
-                <div class="hands">
-                    <button class="choice-btn" data-hand="right">🪨</button>
-                    <button class="choice-btn" data-hand="right">📄</button>
-                    <button class="choice-btn" data-hand="right">✂️</button>
-                </div>
-                <div class="withdraw">
-                    <button id="withdraw-left" class="withdraw-btn">Withdraw Left</button>
-                    <button id="withdraw-right" class="withdraw-btn">Withdraw Right</button>
-                </div>
+            <div class="hand-selection">
+                <label>Right Hand:</label>
+                <select id="player-right">
+                    <option value="rock">Rock</option>
+                    <option value="paper">Paper</option>
+                    <option value="scissors">Scissors</option>
+                </select>
             </div>
         </div>
-
-        <button id="playBtn">Determine Winner</button>
-        <div id="result" class="result"></div>
+        <div class="auto-section">
+            <h2>Auto</h2>
+            <p>Left Hand: <span id="auto-left">?</span></p>
+            <p>Right Hand: <span id="auto-right">?</span></p>
+        </div>
+        <button id="play-button">Play</button>
+        <div class="result-section">
+            <h2>Result</h2>
+            <p id="result-text">Make your move!</p>
+        </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>

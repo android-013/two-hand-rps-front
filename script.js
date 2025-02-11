@@ -1,118 +1,106 @@
-// DOM Elements
+const choices = ["rock", "paper", "scissors"];
 const autoLeftHand = document.getElementById("auto-left-hand");
 const autoRightHand = document.getElementById("auto-right-hand");
 const playButton = document.getElementById("play-button");
 const withdrawLeftButton = document.getElementById("withdraw-left-button");
 const withdrawRightButton = document.getElementById("withdraw-right-button");
-const resultDiv = document.getElementById("result");
+const playAgainButton = document.getElementById("play-again-button");
+const resultDisplay = document.getElementById("result");
 
-// Game State
 let playerLeftChoice = null;
 let playerRightChoice = null;
 let autoLeftChoice = null;
 let autoRightChoice = null;
 
-// Choices
-const choices = ["rock", "paper", "scissors"];
-
-// Event Listeners for Player Choices
-document.querySelectorAll(".choice").forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const hand = e.target.getAttribute("data-hand");
-    const choice = e.target.getAttribute("data-choice");
-
+// Event listeners for player choices
+document.querySelectorAll(".choice").forEach(button => {
+  button.addEventListener("click", () => {
+    const hand = button.getAttribute("data-hand");
+    const choice = button.getAttribute("data-choice");
     if (hand === "left") {
       playerLeftChoice = choice;
     } else if (hand === "right") {
       playerRightChoice = choice;
     }
-
-    // Enable Play button if both hands are chosen
-    if (playerLeftChoice && playerRightChoice) {
-      playButton.disabled = false;
-    }
+    button.classList.add("selected");
   });
 });
 
-// Play Button
+// Play button logic
 playButton.addEventListener("click", () => {
-  // Randomly select auto choices
-  autoLeftChoice = choices[Math.floor(Math.random() * choices.length)];
-  autoRightChoice = choices[Math.floor(Math.random() * choices.length)];
+  if (playerLeftChoice && playerRightChoice) {
+    // Auto chooses random moves
+    autoLeftChoice = choices[Math.floor(Math.random() * 3)];
+    autoRightChoice = choices[Math.floor(Math.random() * 3)];
+    autoLeftHand.textContent = autoLeftChoice;
+    autoRightHand.textContent = autoRightChoice;
 
-  // Display auto choices
-  autoLeftHand.textContent = autoLeftChoice;
-  autoRightHand.textContent = autoRightChoice;
-
-  // Change buttons to withdraw options
-  playButton.classList.add("hidden");
-  withdrawLeftButton.classList.remove("hidden");
-  withdrawRightButton.classList.remove("hidden");
+    // Switch buttons
+    playButton.classList.add("hidden");
+    withdrawLeftButton.classList.remove("hidden");
+    withdrawRightButton.classList.remove("hidden");
+  } else {
+    alert("Please select moves for both hands!");
+  }
 });
 
-// Withdraw Buttons
+// Withdraw buttons logic
 withdrawLeftButton.addEventListener("click", () => withdrawHand("left"));
 withdrawRightButton.addEventListener("click", () => withdrawHand("right"));
 
-// Withdraw Hand Logic
-function withdrawHand(hand) {
-  // Player withdraws a hand
-  if (hand === "left") {
-    playerLeftChoice = null;
-  } else if (hand === "right") {
-    playerRightChoice = null;
-  }
-
+function withdrawHand(playerWithdrawnHand) {
   // Auto randomly withdraws a hand
-  const autoWithdraw = Math.random() < 0.5 ? "left" : "right";
-  if (autoWithdraw === "left") {
-    autoLeftChoice = null;
-  } else {
-    autoRightChoice = null;
-  }
+  const autoWithdrawnHand = Math.random() < 0.5 ? "left" : "right";
 
   // Determine remaining hands
-  const playerRemainingHand = playerLeftChoice || playerRightChoice;
-  const autoRemainingHand = autoLeftChoice || autoRightChoice;
+  const playerRemainingHand = playerWithdrawnHand === "left" ? "right" : "left";
+  const autoRemainingHand = autoWithdrawnHand === "left" ? "right" : "left";
 
-  // Determine the winner
-  if (!playerRemainingHand || !autoRemainingHand) {
-    resultDiv.textContent = "Invalid game state!";
-    return;
-  }
+  // Compare remaining hands to determine the winner
+  const playerRemainingChoice = playerRemainingHand === "left" ? playerLeftChoice : playerRightChoice;
+  const autoRemainingChoice = autoRemainingHand === "left" ? autoLeftChoice : autoRightChoice;
 
-  const winner = determineWinner(playerRemainingHand, autoRemainingHand);
-  resultDiv.textContent = winner === "draw" ? "It's a draw!" : `${winner} wins!`;
+  const winner = determineWinner(playerRemainingChoice, autoRemainingChoice);
 
-  // Reset game state
+  // Display result
+  resultDisplay.textContent = winner === "player" ? "You Win!" : winner === "auto" ? "Auto Wins!" : "It's a Tie!";
+  resultDisplay.classList.remove("hidden");
+
+  // Show play again button
+  withdrawLeftButton.classList.add("hidden");
+  withdrawRightButton.classList.add("hidden");
+  playAgainButton.classList.remove("hidden");
+}
+
+// Play again button logic
+playAgainButton.addEventListener("click", () => {
   resetGame();
-}
+});
 
-// Determine Winner Logic
-function determineWinner(player, auto) {
-  if (player === auto) return "draw";
-  if (
-    (player === "rock" && auto === "scissors") ||
-    (player === "paper" && auto === "rock") ||
-    (player === "scissors" && auto === "paper")
-  ) {
-    return "Player";
-  }
-  return "Auto";
-}
-
-// Reset Game
+// Reset game function
 function resetGame() {
   playerLeftChoice = null;
   playerRightChoice = null;
   autoLeftChoice = null;
   autoRightChoice = null;
-
   autoLeftHand.textContent = "?";
   autoRightHand.textContent = "?";
-
-  withdrawLeftButton.classList.add("hidden");
-  withdrawRightButton.classList.add("hidden");
+  resultDisplay.classList.add("hidden");
+  playAgainButton.classList.add("hidden");
   playButton.classList.remove("hidden");
-  playButton.disabled = true;
+  document.querySelectorAll(".choice").forEach(button => button.classList.remove("selected"));
+}
+
+// Determine winner function
+function determineWinner(playerChoice, autoChoice) {
+  if (playerChoice === autoChoice) return "tie";
+  if (
+    (playerChoice === "rock" && autoChoice === "scissors") ||
+    (playerChoice === "paper" && autoChoice === "rock") ||
+    (playerChoice === "scissors" && autoChoice === "paper")
+  ) {
+    return "player";
+  } else {
+    return "auto";
+  }
 }
